@@ -1,12 +1,12 @@
-// "Da equipe" nível 3: o detalhe de uma sessão. Todas as tags trabalhadas + a
-// devolutiva em texto + confirmação de leitura + resposta.
+// "Sessões" nível 3: detalhe de uma sessão, num card coeso e com acento da cor da
+// disciplina (cabeçalho colorido, ícones, tags coloridas). Devolutiva + leitura + conversa.
 
 import { useState } from 'react'
 import { useStore, proById, sessionById, longDate, relTime, type Author } from '../store'
 import { useNav } from '../nav'
-import { ChevronLeft, Check, Send } from '../components/icons'
+import { ChevronLeft, Check, Send, Target, Note } from '../components/icons'
 
-const FAM: Author = { type: 'familia', id: 'voce', name: 'Você', role: 'em casa', color: '#1f9e8b' }
+const FAM: Author = { type: 'familia', id: 'voce', name: 'Você', role: 'em casa', color: '#7c3aed' }
 
 export default function DaEquipeSessao() {
   const { state, addReply, markRead } = useStore()
@@ -16,6 +16,7 @@ export default function DaEquipeSessao() {
   const [reply, setReply] = useState('')
   if (!e) return null
   const pro = proById(state, e.professionalId)
+  const color = pro?.color ?? '#7c3aed'
 
   function enviar() {
     if (!reply.trim()) return
@@ -34,29 +35,34 @@ export default function DaEquipeSessao() {
       </div>
 
       <div className="rd-scroll">
-        <div className="detail-head">
-          <div className="mav" style={{ background: pro?.color, width: 46, height: 46, borderRadius: 15 }}>{pro?.initial}</div>
-          <div>
-            <div className="name" style={{ fontSize: 18 }}>{pro?.name}</div>
-            <div className="detail-when">{longDate(e.ts)}</div>
+        <div className="card sheet">
+          <div className="sheet-head" style={{ background: `linear-gradient(180deg, ${color}14, transparent)` }}>
+            <div className="savatar" style={{ background: color }}>{pro?.initial}</div>
+            <div style={{ flex: 1 }}>
+              <div className="sh-name">{pro?.name}</div>
+              <div className="sh-sub">{longDate(e.ts)}</div>
+            </div>
+            <span className="disc-badge" style={{ background: `${color}1f`, color }}>{pro?.discipline}</span>
+          </div>
+
+          <div className="sheet-sec">
+            <div className="block-h ico"><Target stroke={color} /> O que foi trabalhado</div>
+            <div className="stags">
+              {e.tags.map((t) => <span className="stag-c" key={t} style={{ background: `${color}1a`, color }}>{t}</span>)}
+            </div>
+          </div>
+
+          <div className="sheet-sec">
+            <div className="block-h ico"><Note stroke={color} /> Recado de {pro?.name}</div>
+            <div className="post-text">{e.orientacao}</div>
+            <div className="tl-actions">
+              {!e.readByFamily && <button className="read-chip" onClick={() => markRead('sessao', e.id)}><Check stroke="#6d28d9" width={13} height={13} /> Confirmar leitura</button>}
+              {e.readByFamily && <span className="read-done"><Check stroke="#938aa8" width={13} height={13} /> Lido</span>}
+            </div>
           </div>
         </div>
 
-        <div className="block-h">O que foi trabalhado</div>
-        <div className="stags">
-          {e.tags.map((t) => <span className="stag" key={t}>{t}</span>)}
-        </div>
-
-        <div className="block-h">Devolutiva da {pro?.role}</div>
-        <div className="card" style={{ padding: '15px 16px' }}>
-          <div className="post-text">{e.orientacao}</div>
-          <div className="tl-actions">
-            {!e.readByFamily && <button className="read-chip" onClick={() => markRead('sessao', e.id)}><Check stroke="#177f70" width={13} height={13} /> Confirmar leitura</button>}
-            {e.readByFamily && <span className="read-done"><Check stroke="#8496a2" width={13} height={13} /> Lido</span>}
-          </div>
-        </div>
-
-        <div className="block-h">Conversa</div>
+        <div className="sec-h"><div className="t">Conversa com {pro?.name}</div></div>
         <div className="card" style={{ padding: '13px 15px' }}>
           {e.replies.length === 0 && <div style={{ fontSize: 12.5, fontWeight: 700, color: 'var(--muted)', marginBottom: 4 }}>Nenhuma mensagem ainda. Tem uma dúvida? Escreva abaixo.</div>}
           {e.replies.length > 0 && (

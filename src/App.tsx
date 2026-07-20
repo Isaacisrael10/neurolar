@@ -4,25 +4,16 @@ import FamiliaHome from './screens/FamiliaHome'
 import RegistrarDia from './screens/RegistrarDia'
 import Perfil from './screens/Perfil'
 import DiaADia from './screens/DiaADia'
+import FamiliaParaCasa from './screens/FamiliaParaCasa'
+import FamiliaCofre from './screens/FamiliaCofre'
+import FamiliaAgenda from './screens/FamiliaAgenda'
+import FamiliaEvolucao from './screens/FamiliaEvolucao'
+import RelatorioEvolucao from './screens/RelatorioEvolucao'
 import DaEquipe from './screens/DaEquipe'
 import DaEquipeSessoes from './screens/DaEquipeSessoes'
 import DaEquipeSessao from './screens/DaEquipeSessao'
-import { TerapeutaPacientes, TerapeutaPaciente, TerapeutaRegistrar, TerapeutaProntuario, TerapeutaAgenda, TerapeutaConta } from './screens/Terapeuta'
-import { ClinicaPainel, ClinicaPacientes, ClinicaEquipe } from './screens/Clinica'
-
-// Definição global da peça do quebra-cabeça (usada no logo "montar").
-function PuzzleDef() {
-  return (
-    <svg width="0" height="0" style={{ position: 'absolute' }}>
-      <defs>
-        <path
-          id="pz"
-          d="M0,0 L38,0 C38,-15 62,-15 62,0 L100,0 L100,38 C115,38 115,62 100,62 L100,100 L62,100 C62,85 38,85 38,100 L0,100 L0,62 C15,62 15,38 0,38 Z"
-        />
-      </defs>
-    </svg>
-  )
-}
+import { TerapeutaPacientes, TerapeutaPaciente, TerapeutaDiscussao, TerapeutaTarefas, TerapeutaDisciplina, TerapeutaRegistrar, TerapeutaProntuario, TerapeutaAgenda, TerapeutaConta } from './screens/Terapeuta'
+import { ClinicaPainel, ClinicaAgenda, ClinicaFinanceiro, ClinicaPacientes, ClinicaEquipe, ClinicaTerapeuta, ClinicaPaciente } from './screens/Clinica'
 
 function CurrentScreen() {
   const { role, route } = useNav()
@@ -32,6 +23,10 @@ function CurrentScreen() {
   if (role === 'familia') {
     if (s === 'registrar') return <RegistrarDia />
     if (s === 'diaadia') return <DiaADia />
+    if (s === 'paracasa') return <FamiliaParaCasa />
+    if (s === 'cofre') return <FamiliaCofre />
+    if (s === 'agenda') return <FamiliaAgenda />
+    if (s === 'evolucao') return <FamiliaEvolucao />
     if (s === 'daequipe') return <DaEquipe />
     if (s === 'daequipe-sessoes') return <DaEquipeSessoes />
     if (s === 'daequipe-sessao') return <DaEquipeSessao />
@@ -41,23 +36,31 @@ function CurrentScreen() {
 
   if (role === 'terapeuta') {
     if (s === 'ter-paciente') return <TerapeutaPaciente />
+    if (s === 'ter-discussao') return <TerapeutaDiscussao />
+    if (s === 'ter-tarefas') return <TerapeutaTarefas />
+    if (s === 'ter-disciplina') return <TerapeutaDisciplina />
     if (s === 'ter-registrar') return <TerapeutaRegistrar />
     if (s === 'ter-prontuario') return <TerapeutaProntuario />
     if (s === 'ter-agenda') return <TerapeutaAgenda />
     if (s === 'ter-conta') return <TerapeutaConta />
+    if (s === 'relatorio') return <RelatorioEvolucao />
     return <TerapeutaPacientes />
   }
 
   // clínica
+  if (s === 'cli-agenda') return <ClinicaAgenda />
+  if (s === 'cli-financeiro') return <ClinicaFinanceiro />
   if (s === 'cli-pacientes') return <ClinicaPacientes />
   if (s === 'cli-equipe') return <ClinicaEquipe />
+  if (s === 'cli-terapeuta') return <ClinicaTerapeuta />
+  if (s === 'cli-paciente') return <ClinicaPaciente />
+  if (s === 'relatorio') return <RelatorioEvolucao />
   return <ClinicaPainel />
 }
 
 export default function App() {
   return (
     <>
-      <PuzzleDef />
       <div className="stage">
         <div className="phone">
           <CurrentScreen />

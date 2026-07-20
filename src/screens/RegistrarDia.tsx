@@ -13,7 +13,7 @@ const criseOpts = ['Nenhuma', '1', '2 ou mais']
 
 const moods = [
   { key: 'Feliz', color: '#45a86a', mouth: 'M8 14.5s1.5 2 4 2 4-2 4-2' },
-  { key: 'Tranquila', color: '#1f9e8b', mouth: 'M8.5 14.5h7' },
+  { key: 'Tranquila', color: '#7c3aed', mouth: 'M8.5 14.5h7' },
   { key: 'Irritada', color: '#e6a02f', mouth: 'M8.5 15.5s1.3-1 3.5-1 3.5 1 3.5 1' },
   { key: 'Chorosa', color: '#e2705a', mouth: 'M8 16s1.5-2 4-2 4 2 4 2' },
 ]
@@ -108,7 +108,7 @@ export default function RegistrarDia() {
 
         <div className="q">
           <div className="q-h">
-            <span className="qi" style={{ background: 'var(--teal-soft)' }}><Note /></span>
+            <span className="qi" style={{ background: 'linear-gradient(150deg,#a78bfa,#7c3aed)' }}><Note stroke="#fff" /></span>
             Observações do dia
           </div>
           <textarea

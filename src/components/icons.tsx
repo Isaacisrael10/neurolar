@@ -2,18 +2,13 @@
 
 type IconProps = { stroke?: string; width?: number; height?: number }
 
-export function PuzzleLogo({ size = 24 }: { size?: number }) {
+export function NeuroLarLogo({ size = 24 }: { size?: number }) {
   return (
-    <svg className="pzico" viewBox="-16 -16 232 232" style={{ width: size, height: size }}>
-      <use href="#pz" fill="#e64a3b" />
-      <use href="#pz" transform="translate(100,0)" fill="#2c82c9" />
-      <use href="#pz" transform="translate(0,100)" fill="#f2b636" />
-      <use href="#pz" transform="translate(100,100)" fill="#46a758" />
-    </svg>
+    <img src="/logo-mark.png" alt="NeuroLar" width={size} height={size} style={{ borderRadius: Math.round(size * 0.28), display: 'block' }} />
   )
 }
 
-export function Bell({ stroke = '#5a6b76' }: IconProps) {
+export function Bell({ stroke = '#645d78' }: IconProps) {
   return (
     <svg viewBox="0 0 24 24" fill="none" stroke={stroke} strokeWidth={2} strokeLinecap="round" strokeLinejoin="round" width="19" height="19">
       <path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9" />
@@ -22,7 +17,7 @@ export function Bell({ stroke = '#5a6b76' }: IconProps) {
   )
 }
 
-export function ChevronDown({ stroke = '#8496a2' }: IconProps) {
+export function ChevronDown({ stroke = '#938aa8' }: IconProps) {
   return (
     <svg viewBox="0 0 24 24" fill="none" stroke={stroke} strokeWidth={2.5} strokeLinecap="round" strokeLinejoin="round" width="15" height="15">
       <path d="m6 9 6 6 6-6" />
@@ -38,7 +33,7 @@ export function ChevronLeft({ stroke = '#2c3e4a' }: IconProps) {
   )
 }
 
-export function ChevronRight({ stroke = '#8496a2' }: IconProps) {
+export function ChevronRight({ stroke = '#938aa8' }: IconProps) {
   return (
     <svg viewBox="0 0 24 24" fill="none" stroke={stroke} strokeWidth={2.4} strokeLinecap="round" strokeLinejoin="round">
       <path d="m9 6 6 6-6 6" />
@@ -46,7 +41,7 @@ export function ChevronRight({ stroke = '#8496a2' }: IconProps) {
   )
 }
 
-export function Heart({ fill = '#1f9e8b' }: { fill?: string }) {
+export function Heart({ fill = '#7c3aed' }: { fill?: string }) {
   return (
     <svg className="hrt" viewBox="0 0 24 24">
       <path d="M12 21s-7-4.5-9.3-9A5.4 5.4 0 0 1 12 6.2 5.4 5.4 0 0 1 21.3 12C19 16.5 12 21 12 21z" fill={fill} />
@@ -98,7 +93,7 @@ export function Pencil({ stroke = '#fff' }: IconProps) {
   )
 }
 
-export function Calendar({ stroke = '#177f70' }: IconProps) {
+export function Calendar({ stroke = '#6d28d9' }: IconProps) {
   return (
     <svg viewBox="0 0 24 24" fill="none" stroke={stroke} strokeWidth={2.2} strokeLinecap="round" strokeLinejoin="round">
       <rect x="3" y="4" width="18" height="17" rx="2.5" />
@@ -107,7 +102,7 @@ export function Calendar({ stroke = '#177f70' }: IconProps) {
   )
 }
 
-export function Note({ stroke = '#1f9e8b' }: IconProps) {
+export function Note({ stroke = '#7c3aed' }: IconProps) {
   return (
     <svg viewBox="0 0 24 24" fill="none" stroke={stroke} strokeWidth={2} strokeLinecap="round" strokeLinejoin="round">
       <path d="M4 4h16v12H8l-4 4z" />
@@ -138,7 +133,7 @@ export function Check({ stroke = '#fff', width = 13, height = 13 }: IconProps) {
   )
 }
 
-export function Plus({ stroke = '#1f9e8b' }: IconProps) {
+export function Plus({ stroke = '#7c3aed' }: IconProps) {
   return (
     <svg viewBox="0 0 24 24" fill="none" stroke={stroke} strokeWidth={3} strokeLinecap="round">
       <path d="M12 5v14M5 12h14" />
@@ -156,23 +151,6 @@ export function MedalMini() {
   )
 }
 
-export function StarBadge() {
-  return (
-    <svg viewBox="0 0 24 24">
-      <path d="M12 3l2.5 5 5.5.8-4 3.9.95 5.5L12 21.4 7.05 18.2 8 12.7l-4-3.9L9.5 8z" fill="#fff" />
-    </svg>
-  )
-}
-
-export function LockBadge() {
-  return (
-    <svg viewBox="0 0 24 24" fill="none" stroke="#97a1ab" strokeWidth={2}>
-      <rect x="5" y="11" width="14" height="9" rx="2" fill="#eef1f4" />
-      <path d="M8 11V8a4 4 0 0 1 8 0v3" />
-    </svg>
-  )
-}
-
 // Carinha de humor
 export function Face({ color, mouth }: { color: string; mouth: string }) {
   return (
@@ -186,7 +164,7 @@ export function Face({ color, mouth }: { color: string; mouth: string }) {
 
 /* ---- ícones de navegação ---- */
 
-export function NavHome({ stroke = '#8496a2' }: IconProps) {
+export function NavHome({ stroke = '#938aa8' }: IconProps) {
   return (
     <svg viewBox="0 0 24 24" fill="none" stroke={stroke} strokeWidth={2.2} strokeLinecap="round" strokeLinejoin="round">
       <path d="M3 10.5 12 3l9 7.5" />
@@ -195,7 +173,7 @@ export function NavHome({ stroke = '#8496a2' }: IconProps) {
   )
 }
 
-export function NavChart({ stroke = '#8496a2' }: IconProps) {
+export function NavChart({ stroke = '#938aa8' }: IconProps) {
   return (
     <svg viewBox="0 0 24 24" fill="none" stroke={stroke} strokeWidth={2.2} strokeLinecap="round" strokeLinejoin="round">
       <path d="M4 20V4" />
@@ -206,7 +184,16 @@ export function NavChart({ stroke = '#8496a2' }: IconProps) {
   )
 }
 
-export function NavPerson({ stroke = '#8496a2' }: IconProps) {
+export function NavMoney({ stroke = '#938aa8' }: IconProps) {
+  return (
+    <svg viewBox="0 0 24 24" fill="none" stroke={stroke} strokeWidth={2.2} strokeLinecap="round" strokeLinejoin="round">
+      <path d="M12 2v20" />
+      <path d="M17 5.5H9.75a3.25 3.25 0 0 0 0 6.5h4.5a3.25 3.25 0 0 1 0 6.5H6" />
+    </svg>
+  )
+}
+
+export function NavPerson({ stroke = '#938aa8' }: IconProps) {
   return (
     <svg viewBox="0 0 24 24" fill="none" stroke={stroke} strokeWidth={2.2} strokeLinecap="round" strokeLinejoin="round">
       <circle cx="12" cy="8" r="4" />
@@ -215,7 +202,7 @@ export function NavPerson({ stroke = '#8496a2' }: IconProps) {
   )
 }
 
-export function NavUsers({ stroke = '#8496a2' }: IconProps) {
+export function NavUsers({ stroke = '#938aa8' }: IconProps) {
   return (
     <svg viewBox="0 0 24 24" fill="none" stroke={stroke} strokeWidth={2.2} strokeLinecap="round" strokeLinejoin="round">
       <circle cx="9" cy="8" r="3.2" />
@@ -225,10 +212,30 @@ export function NavUsers({ stroke = '#8496a2' }: IconProps) {
   )
 }
 
-export function Chat({ stroke = '#8496a2' }: IconProps) {
+export function Chat({ stroke = '#938aa8' }: IconProps) {
   return (
     <svg viewBox="0 0 24 24" fill="none" stroke={stroke} strokeWidth={2.2} strokeLinecap="round" strokeLinejoin="round">
       <path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8z" />
+    </svg>
+  )
+}
+
+export function Target({ stroke = '#938aa8' }: IconProps) {
+  return (
+    <svg viewBox="0 0 24 24" fill="none" stroke={stroke} strokeWidth={2} strokeLinecap="round" strokeLinejoin="round">
+      <circle cx="12" cy="12" r="9" />
+      <circle cx="12" cy="12" r="5" />
+      <circle cx="12" cy="12" r="1.4" fill={stroke} stroke="none" />
+    </svg>
+  )
+}
+
+export function Clipboard({ stroke = '#938aa8' }: IconProps) {
+  return (
+    <svg viewBox="0 0 24 24" fill="none" stroke={stroke} strokeWidth={2.2} strokeLinecap="round" strokeLinejoin="round">
+      <rect x="8" y="2" width="8" height="4" rx="1" />
+      <path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2" />
+      <path d="M9 12h6M9 16h4" />
     </svg>
   )
 }
@@ -241,7 +248,7 @@ export function Send({ stroke = '#fff' }: IconProps) {
   )
 }
 
-export function FileText({ stroke = '#177f70' }: IconProps) {
+export function FileText({ stroke = '#6d28d9' }: IconProps) {
   return (
     <svg viewBox="0 0 24 24" fill="none" stroke={stroke} strokeWidth={2} strokeLinecap="round" strokeLinejoin="round">
       <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" />
@@ -250,7 +257,16 @@ export function FileText({ stroke = '#177f70' }: IconProps) {
   )
 }
 
-export function NavBuilding({ stroke = '#8496a2' }: IconProps) {
+export function Search({ stroke = '#938aa8' }: IconProps) {
+  return (
+    <svg viewBox="0 0 24 24" fill="none" stroke={stroke} strokeWidth={2.2} strokeLinecap="round" strokeLinejoin="round">
+      <circle cx="11" cy="11" r="7" />
+      <path d="m21 21-4.3-4.3" />
+    </svg>
+  )
+}
+
+export function NavBuilding({ stroke = '#938aa8' }: IconProps) {
   return (
     <svg viewBox="0 0 24 24" fill="none" stroke={stroke} strokeWidth={2.2} strokeLinecap="round" strokeLinejoin="round">
       <rect x="4" y="3" width="16" height="18" rx="2" />

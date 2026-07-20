@@ -1,21 +1,23 @@
 // Início da FAMÍLIA: uma visão geral com atalhos. O conteúdo pesado mora nas
 // abas próprias (Dia a dia = ofensiva + registro; Da equipe = publicações).
 
-import { useStore, childById, teamOf, sessionsOf, prontuarioOf, streakOf, lastUpdateOf, proById, relTime } from '../store'
+import { useStore, childById, teamOf, sessionsOf, streakOf, lastUpdateOf, proById, paraCasaToday } from '../store'
 import { useNav } from '../nav'
 import { BottomNav, type NavItem } from '../components/BottomNav'
+import { Avatar } from '../components/Avatar'
 import {
-  PuzzleLogo, Bell, ChevronDown, ChevronRight, Heart, Moon, Utensils, Smiley, Pulse, Pencil, Calendar, Flame,
-  Chat, NavHome, NavPerson,
+  NeuroLarLogo, Bell, ChevronDown, ChevronRight, Heart, Moon, Utensils, Smiley, Pulse, Pencil, Calendar, Flame,
+  Clipboard, Check, NavHome, NavPerson, NavChart,
 } from '../components/icons'
 
 const CHILD = 'ana'
 
 export const familiaNav: NavItem[] = [
-  { key: 'inicio', label: 'Início', icon: (on) => <NavHome stroke={on ? '#177f70' : '#8496a2'} /> },
-  { key: 'diaadia', label: 'Dia a dia', icon: (on) => <Pencil stroke={on ? '#177f70' : '#8496a2'} /> },
-  { key: 'daequipe', label: 'Da equipe', icon: (on) => <Chat stroke={on ? '#177f70' : '#8496a2'} /> },
-  { key: 'perfil', label: 'Perfil', icon: (on) => <NavPerson stroke={on ? '#177f70' : '#8496a2'} /> },
+  { key: 'inicio', label: 'Início', icon: (on) => <NavHome stroke={on ? '#6d28d9' : '#938aa8'} /> },
+  { key: 'diaadia', label: 'Dia a dia', icon: (on) => <Pencil stroke={on ? '#6d28d9' : '#938aa8'} /> },
+  { key: 'evolucao', label: 'Evolução', icon: (on) => <NavChart stroke={on ? '#6d28d9' : '#938aa8'} /> },
+  { key: 'daequipe', label: 'Sessões', icon: (on) => <Clipboard stroke={on ? '#6d28d9' : '#938aa8'} /> },
+  { key: 'perfil', label: 'Perfil', icon: (on) => <NavPerson stroke={on ? '#6d28d9' : '#938aa8'} /> },
 ]
 
 export function FamiliaTabs({ active }: { active: string }) {
@@ -32,23 +34,23 @@ export default function FamiliaHome() {
 
   const team = teamOf(state, child)
   const sessions = sessionsOf(state, CHILD).slice(0, 2)
-  const daequipe = prontuarioOf(state, CHILD).slice(0, 2)
   const streak = streakOf(state, CHILD)
   const last = lastUpdateOf(state, CHILD)
+  const pc = paraCasaToday(state, CHILD)
 
   return (
     <>
       <div className="scroll">
         <div className="topbar">
           <div className="logo">
-            <PuzzleLogo />
-            <div className="w">montar</div>
+            <NeuroLarLogo />
+            <div className="w">Neuro<span>Lar</span></div>
           </div>
           <div className="bell"><Bell /></div>
         </div>
 
         <div className="child">
-          <div className="kid">{child.initial}</div>
+          <Avatar photo={child.photo} initial={child.initial} className="kid" />
           <div>
             <div className="name">{child.name}</div>
             <div className="sub">{child.age} anos</div>
@@ -63,7 +65,7 @@ export default function FamiliaHome() {
 
         <div className="together">
           <div className="stack">
-            <div className="a" style={{ background: 'var(--teal)' }}>V</div>
+            <Avatar photo={child.photo} initial={child.initial} className="a" />
             {team.map((p) => (
               <div className="a" key={p.id} style={{ background: p.color }}>{p.initial}</div>
             ))}
@@ -84,6 +86,21 @@ export default function FamiliaHome() {
           <span className="go"><ChevronRight /></span>
         </div>
 
+        {/* para casa: tarefas de todas as terapias unificadas */}
+        <div className="pc-home" onClick={() => navigate('paracasa')}>
+          <div className="pc-ic"><Clipboard stroke="#fff" /></div>
+          <div className="pc-mid">
+            <div className="pc-t">Para casa</div>
+            <div className="pc-s">{pc.done} de {pc.total} feitas hoje</div>
+            <div className="pc-bar"><span style={{ width: pc.total ? `${(pc.done / pc.total) * 100}%` : '0%' }}></span></div>
+          </div>
+          {pc.done === pc.total && pc.total > 0 ? (
+            <span className="pc-done"><Check stroke="#fff" width={13} height={13} /></span>
+          ) : (
+            <span className="go"><ChevronRight /></span>
+          )}
+        </div>
+
         {/* registrar o dia */}
         <div className="card reg">
           <div className="reg-h">Registrar o dia de hoje</div>
@@ -100,9 +117,9 @@ export default function FamiliaHome() {
         {/* próximas sessões */}
         <div className="sec-h">
           <div className="t"><Calendar />Próximas sessões</div>
-          <div className="s">ver agenda</div>
+          <button className="seemore" onClick={() => navigate('agenda')}>Ver agenda <ChevronRight stroke="#6d28d9" /></button>
         </div>
-        <div className="card agenda">
+        <div className="card agenda" onClick={() => navigate('agenda')} style={{ cursor: 'pointer' }}>
           {sessions.map((se, i) => {
             const p = proById(state, se.professionalId)
             if (!p) return null
@@ -119,30 +136,6 @@ export default function FamiliaHome() {
           })}
         </div>
 
-        {/* prévia das publicações da equipe */}
-        <div className="sec-h">
-          <div className="t"><Chat stroke="#2c3e4a" />Da equipe</div>
-          <div className="s" onClick={() => goTab('daequipe')} style={{ cursor: 'pointer' }}>ver tudo</div>
-        </div>
-        {daequipe.map((e) => {
-          const p = proById(state, e.professionalId)
-          return (
-            <div className="post" key={e.id} onClick={() => goTab('daequipe')} style={{ cursor: 'pointer' }}>
-              <div className="post-h">
-                <div className="post-av" style={{ background: p?.color }}>{p?.initial}</div>
-                <div>
-                  <div className="post-who">{p?.name}</div>
-                  <div className="post-role">{p?.discipline} · sessão</div>
-                </div>
-                <div className="post-when">{relTime(e.ts)}</div>
-              </div>
-              <div className="stags" style={{ marginBottom: 8 }}>
-                {e.tags.slice(0, 3).map((t) => <span className="stag" key={t}>{t}</span>)}
-              </div>
-              <div className="post-text">{e.orientacao}</div>
-            </div>
-          )
-        })}
       </div>
 
       <FamiliaTabs active="inicio" />

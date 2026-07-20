@@ -1,17 +1,19 @@
 // Perfil da família: dados da criança (editáveis e salvos), equipe e troca de perfil.
 
 import { useState } from 'react'
-import { useStore, childById, teamOf } from '../store'
+import { useStore, childById, teamOf, documentosOf } from '../store'
 import { useNav } from '../nav'
-import { Check } from '../components/icons'
+import { Check, FileText, ChevronRight } from '../components/icons'
+import { Avatar } from '../components/Avatar'
 import { FamiliaTabs } from './FamiliaHome'
 
 const CHILD = 'ana'
 
 export default function Perfil() {
   const { state, updateChild, resetAll } = useStore()
-  const { exit } = useNav()
+  const { exit, navigate } = useNav()
   const child = childById(state, CHILD)
+  const docs = documentosOf(state, CHILD)
 
   const [nome, setNome] = useState(child?.name ?? '')
   const [idade, setIdade] = useState(String(child?.age ?? ''))
@@ -39,7 +41,7 @@ export default function Perfil() {
         </div>
 
         <div className="child" style={{ paddingTop: 8 }}>
-          <div className="kid">{child.initial}</div>
+          <Avatar photo={child.photo} initial={child.initial} className="kid" />
           <div>
             <div className="name">{child.name}</div>
             <div className="sub">{child.age} anos &middot; {child.diagnosis || 'sem diagnóstico'}</div>
@@ -66,6 +68,15 @@ export default function Perfil() {
           <div className="btn" onClick={salvar} style={{ marginTop: 6 }}>
             <Check stroke="#fff" width={18} height={18} /> {saved ? 'Salvo!' : 'Salvar alterações'}
           </div>
+        </div>
+
+        <div className="pc-home" onClick={() => navigate('cofre')} style={{ marginTop: 14 }}>
+          <div className="pc-ic"><FileText stroke="#fff" /></div>
+          <div className="pc-mid">
+            <div className="pc-t">Cofre de documentos</div>
+            <div className="pc-s">{docs.length} guardados &middot; laudo, receitas, relatórios</div>
+          </div>
+          <span className="go"><ChevronRight /></span>
         </div>
 
         <div className="sec-h"><div className="t">Equipe da {child.name}</div></div>

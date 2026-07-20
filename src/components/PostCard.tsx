@@ -4,6 +4,7 @@
 import { useState } from 'react'
 import { useStore, relTime, type Author, type TimelineItem } from '../store'
 import { Send, Check, Moon, Utensils, Smiley, Pulse } from './icons'
+import { Avatar } from './Avatar'
 
 function Tags({ tags }: { tags: { sono?: string; alim?: string; humor?: string; crises?: string } }) {
   const semC = (tags.crises ?? 'Nenhuma') === 'Nenhuma'
@@ -13,7 +14,7 @@ function Tags({ tags }: { tags: { sono?: string; alim?: string; humor?: string; 
       {tags.alim && <span className="tag" style={{ background: 'var(--green-soft)', color: '#2f8451' }}><Utensils stroke="#2f8451" /> {tags.alim}</span>}
       {tags.humor && <span className="tag" style={{ background: 'var(--amber-soft)', color: '#b57d16' }}><Smiley stroke="#b57d16" /> {tags.humor}</span>}
       <span className="tag" style={semC ? { background: 'var(--teal-soft)', color: 'var(--teal-d)' } : { background: 'var(--coral-soft)', color: '#c14a34' }}>
-        <Pulse stroke={semC ? '#177f70' : '#c14a34'} /> {semC ? 'Sem crise' : `${tags.crises} crise${tags.crises === '1' ? '' : 's'}`}
+        <Pulse stroke={semC ? '#6d28d9' : '#c14a34'} /> {semC ? 'Sem crise' : `${tags.crises} crise${tags.crises === '1' ? '' : 's'}`}
       </span>
     </div>
   )
@@ -33,7 +34,7 @@ export function PostCard({ item: it, author }: { item: TimelineItem; author: Aut
   return (
     <div className="post">
       <div className="post-h">
-        <div className="post-av" style={{ background: it.color }}>{it.authorName.charAt(0)}</div>
+        <Avatar photo={it.photo} initial={it.authorName.charAt(0)} className="post-av" />
         <div>
           <div className="post-who">{it.authorName}</div>
           <div className="post-role">registro do dia</div>
@@ -46,8 +47,8 @@ export function PostCard({ item: it, author }: { item: TimelineItem; author: Aut
 
       {isTeam && (
         <div className="tl-actions">
-          {!it.readByTeam && <button className="read-chip" onClick={() => markRead('diario', it.id)}><Check stroke="#177f70" width={13} height={13} /> Marcar como visto</button>}
-          {it.readByTeam && <span className="read-done"><Check stroke="#8496a2" width={13} height={13} /> Visto</span>}
+          {!it.readByTeam && <button className="read-chip" onClick={() => markRead('diario', it.id)}><Check stroke="#6d28d9" width={13} height={13} /> Marcar como visto</button>}
+          {it.readByTeam && <span className="read-done"><Check stroke="#938aa8" width={13} height={13} /> Visto</span>}
         </div>
       )}
 

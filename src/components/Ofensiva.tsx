@@ -1,18 +1,7 @@
 // A ofensiva = o placar da postagem diária dos pais. Mora na aba "Dia a dia".
 
-import { useStore, childById, streakOf, weekOf, achievementsOf, type Achievement } from '../store'
-import { Flame, Heart, Check, Plus, MedalMini, StarBadge, LockBadge } from './icons'
-
-function badgeBg(a: Achievement): string {
-  if (a.state === 'lock') return 'linear-gradient(145deg,#dbe0e5,#c3cad1)'
-  const grads = [
-    'linear-gradient(145deg,#d99553,#b26a26)',
-    'linear-gradient(145deg,#aeb8c1,#8894a0)',
-    'linear-gradient(145deg,#f6c84e,#e0a11c)',
-    'linear-gradient(145deg,#f6c84e,#e0a11c)',
-  ]
-  return grads[a.tier]
-}
+import { useStore, childById, streakOf, weekOf, achievementsOf } from '../store'
+import { Flame, Heart, Check, Plus, MedalMini } from './icons'
 
 export function Ofensiva({ childId }: { childId: string }) {
   const { state } = useStore()
@@ -30,7 +19,7 @@ export function Ofensiva({ childId }: { childId: string }) {
           <Flame />
           <div className="sinfo">
             <div className="snum">
-              {streak} <span className="u">dias seguidos</span> <Heart fill="#1f9e8b" />
+              {streak} <span className="u">dias seguidos</span> <Heart fill="#7c3aed" />
             </div>
             <div className="ssub">registrando o dia a dia da {child.name}</div>
           </div>
@@ -57,18 +46,6 @@ export function Ofensiva({ childId }: { childId: string }) {
             <div className="mtxt">Continue registrando pra desbloquear!</div>
           </div>
         )}
-      </div>
-
-      <div className="sec-h"><div className="t">Conquistas</div><div className="s">ver todas</div></div>
-      <div className="badges">
-        {achievements.map((a, i) => (
-          <div className={`badge ${a.state === 'next' ? 'next' : a.state === 'lock' ? 'lock' : ''}`.trim()} key={i}>
-            <div className="bcir" style={{ background: badgeBg(a) }}>
-              {a.state === 'lock' ? <LockBadge /> : <StarBadge />}
-            </div>
-            <div className="bn">{a.label}</div>
-          </div>
-        ))}
       </div>
     </>
   )

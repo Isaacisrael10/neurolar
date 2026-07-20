@@ -5,11 +5,11 @@ import { useStore, childById, registrosOf, diarioFeedOf, type Author } from '../
 import { useNav } from '../nav'
 import { Ofensiva } from '../components/Ofensiva'
 import { PostCard } from '../components/PostCard'
-import { Moon, Utensils, Smiley, Pulse, Pencil } from '../components/icons'
+import { Pencil } from '../components/icons'
 import { FamiliaTabs } from './FamiliaHome'
 
 const CHILD = 'ana'
-const FAM: Author = { type: 'familia', id: 'voce', name: 'Você', role: 'em casa', color: '#1f9e8b' }
+const FAM: Author = { type: 'familia', id: 'voce', name: 'Você', role: 'em casa', color: '#7c3aed' }
 
 export default function DiaADia() {
   const { state } = useStore()
@@ -35,18 +35,8 @@ export default function DiaADia() {
           </div>
         </div>
 
-        {/* registrar o dia */}
-        <div className="card reg" style={{ marginTop: 8 }}>
-          <div className="reg-h">Registrar o dia de hoje</div>
-          <div className="reg-s">Um minutinho pra contar como a {child.name} esteve</div>
-          <div className="chips">
-            <div className="chip"><Moon /><div className="cl">Sono</div></div>
-            <div className="chip"><Utensils /><div className="cl">Alimentação</div></div>
-            <div className="chip"><Smiley /><div className="cl">Humor</div></div>
-            <div className="chip"><Pulse /><div className="cl">Crises</div></div>
-          </div>
-          <div className="btn" onClick={() => navigate('registrar')}><Pencil /> Registrar hoje</div>
-        </div>
+        {/* registrar o dia (o card completo mora no Início; aqui é só o atalho) */}
+        <div className="btn" style={{ marginTop: 10 }} onClick={() => navigate('registrar')}><Pencil stroke="#fff" /> Registrar o dia de hoje</div>
 
         {/* ofensiva */}
         <div className="sec-h"><div className="t">Sua constância</div></div>

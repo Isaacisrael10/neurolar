@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom/client'
 import App from './App'
 import { StoreProvider } from './store'
 import { NavProvider } from './nav'
-import './montar.css'
+import './neurolar.css'
 
 ReactDOM.createRoot(document.getElementById('root')!).render(
   <React.StrictMode>

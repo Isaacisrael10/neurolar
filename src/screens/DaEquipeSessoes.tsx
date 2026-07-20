@@ -1,5 +1,5 @@
-// "Da equipe" nível 2: as sessões de uma terapia, em ordem cronológica (mais
-// recente primeiro), como resumo. Clica numa sessão -> detalhe completo.
+// "Sessões" nível 2: as sessões de uma terapia numa LINHA DO TEMPO (cronológica,
+// mais recente primeiro). Cada sessão é um nó. Clica numa sessão -> detalhe.
 
 import { useStore, proById, prontuarioByPro, longDate } from '../store'
 import { useNav } from '../nav'
@@ -13,6 +13,7 @@ export default function DaEquipeSessoes() {
   const proId = (route?.params?.proId as string) ?? 'm'
   const pro = proById(state, proId)
   if (!pro) return null
+  const color = pro.color
   const sessions = prontuarioByPro(state, CHILD, proId)
 
   return (
@@ -27,23 +28,35 @@ export default function DaEquipeSessoes() {
 
       <div className="rd-scroll">
         {sessions.length === 0 && <div style={{ padding: '24px 0', textAlign: 'center', color: 'var(--muted)', fontWeight: 800, fontSize: 13 }}>Nenhuma sessão registrada ainda.</div>}
-        {sessions.map((e) => (
-          <div className="sess" key={e.id} onClick={() => navigate('daequipe-sessao', { sessId: e.id })}>
-            <div className="sess-h">
-              <div>
-                <div className="sess-d">{longDate(e.ts)}</div>
-                <div className="sess-when">sessão</div>
+
+        <div className="timeline">
+          {sessions.map((e) => (
+            <div className="tl" key={e.id}>
+              <div className="tl-node" style={{ background: color }}></div>
+              <div className="sess" onClick={() => navigate('daequipe-sessao', { sessId: e.id })}>
+                <div className="sess-h">
+                  <div>
+                    <div className="sess-d">{longDate(e.ts)}</div>
+                    <div className="sess-when">{e.tags.length} {e.tags.length === 1 ? 'área trabalhada' : 'áreas trabalhadas'}</div>
+                  </div>
+                  <span className="go">
+                    {!e.readByFamily && <span className="novo">Novo</span>}
+                    <ChevronRight />
+                  </span>
+                </div>
+                <div className="stags">
+                  {e.tags.map((t) => <span className="stag-c" key={t} style={{ background: `${color}1a`, color }}>{t}</span>)}
+                </div>
               </div>
-              <span className="go">
-                {!e.readByFamily && <span className="unread"></span>}
-                <ChevronRight />
-              </span>
             </div>
-            <div className="stags">
-              {e.tags.map((t) => <span className="stag" key={t}>{t}</span>)}
+          ))}
+          {sessions.length > 0 && (
+            <div className="tl">
+              <div className="tl-node tl-start"></div>
+              <div className="tl-start-label">Início do acompanhamento na {pro.discipline}</div>
             </div>
-          </div>
-        ))}
+          )}
+        </div>
       </div>
     </div>
   )
