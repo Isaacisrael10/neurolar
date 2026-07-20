@@ -1,6 +1,6 @@
-# montar
+# NeuroLar
 
-Protótipo do app **montar** — plataforma de comunicação e prontuário compartilhado
+Protótipo do app **NeuroLar** — plataforma de comunicação e prontuário compartilhado
 para crianças autistas, conectando a **família** e a **equipe multidisciplinar** (clínica).
 
 Feito em **React + TypeScript + Vite**. Tudo salvo no navegador (localStorage);
@@ -9,7 +9,7 @@ depois o mesmo store vira Supabase sem mexer nas telas.
 ## Como rodar
 
 1. Instale o Node.js (LTS) uma vez: https://nodejs.org  (`winget install OpenJS.NodeJS.LTS`)
-2. Na pasta `montar-app`:
+2. Na pasta do projeto:
    ```bash
    npm install
    npm run dev
@@ -37,7 +37,7 @@ src/
   App.tsx              # roteamento por perfil + moldura
   store.tsx            # dados + persistência (localStorage) + ações + seletores
   nav.tsx              # perfil ativo + pilha de rotas + deep links
-  montar.css           # design system (idêntico ao mockup aprovado)
+  neurolar.css         # design system (idêntico ao mockup aprovado)
   components/
     icons.tsx          # ícones SVG custom compartilhados
     BottomNav.tsx      # barra inferior reutilizável
