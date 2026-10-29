@@ -4,7 +4,7 @@ type IconProps = { stroke?: string; width?: number; height?: number }
 
 export function NeuroLarLogo({ size = 24 }: { size?: number }) {
   return (
-    <img src="/logo-mark.png" alt="NeuroLar" width={size} height={size} style={{ borderRadius: Math.round(size * 0.28), display: 'block' }} />
+    <img src={`${import.meta.env.BASE_URL}logo-mark.png`} alt="NeuroLar" width={size} height={size} style={{ borderRadius: Math.round(size * 0.28), display: 'block' }} />
   )
 }
 
